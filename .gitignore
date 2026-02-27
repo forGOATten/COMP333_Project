@@ -1,8 +1,8 @@
 # Data files (too large for Git)
-data/*.csv
-data/*.zip
-data/*.parquet
-data/*.json
+Data/*.csv
+Data/*.zip
+Data/*.parquet
+Data/*.json
 *.csv
 *.zip
 
@@ -19,6 +19,7 @@ build/
 
 # Virtual environments
 venv/
+.venv/
 env/
 .env/
 
