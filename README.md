@@ -21,23 +21,23 @@ and their distance to the nearest Metro, can we programmatically identify the ci
 ### 1. 
 - **Name:** Bixi 2025 Trip History
 - **Source:** https://bixi.com/en/open-data/
-- **Size:** 
-- **Records:** 
-- **Features:** 
+- **Size:** 2.60GB
+- **Records:** 14.2m
+- **Features:** 10 columns
 
 ### 2. 
 - **Name:** Environment Canada Weather (Hourly Climate)
 - **Source:**https://climate-change.canada.ca/climate-data/#/hourly-climate-data
-- **Size:** 
-- **Records:** 
-- **Features:** 
+- **Size:**  4.6 MB (Combined)
+- **Records:** 17,977
+- **Features:** 40 columns
 
 ### 3. 
 - **Name:** STM (Metro station locations)
 - **Source:** https://www.stm.info/en/about/developers
-- **Size:** 
-- **Records:** 
-- **Features:** 
+- **Size:** 937 KB
+- **Records:** 8951
+- **Features:** 9 columns: stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,location_type,parent_station,wheelchair_boarding
 
 ### Download Instructions
 [to complete]
@@ -105,3 +105,6 @@ This project uses AI coding assistants for boilerplate code generation, debuggin
 
 ## References
 (update as we go)
+- BIXI Montréal. "Open Data." BIXI Montréal, https://bixi.com/en/open-data/
+- Government of Canada. "Hourly Climate Data." Climate Change Canada, https://climate-change.canada.ca/climate-data/#/hourly-climate-data
+- Société de transport de Montréal (STM). "Developers." STM, https://www.stm.info/en/about/developers
