@@ -5,7 +5,7 @@
 | Name | Student ID | Contribution |
 |------|-----------|--------------|
 | Gorden | 40263250 | - readme, github repo, Baseline Model Execution |
-| [Teammate 2] | [ID] | [Describe contributions] |
+| Omar Benjelloun | 40215107 | - Data Retrieval, Wrangling/Cleaning, EDA|
 
 ## Project Overview
 
