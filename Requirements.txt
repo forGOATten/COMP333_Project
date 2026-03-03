@@ -9,20 +9,10 @@ scipy>=1.10
 # Visualization
 matplotlib>=3.7
 seaborn>=0.12
-plotly>=5.14
 
 # Machine Learning
 scikit-learn>=1.3
-xgboost>=2.0
-lightgbm>=4.0
 
 # Notebooks
 jupyter>=1.0
 notebook>=7.0
-ipykernel>=6.0
-
-# Data retrieval
-kaggle>=1.5
-
-# Utilities
-tqdm>=4.65

@@ -4,18 +4,18 @@
 
 | Name | Student ID | Contribution |
 |------|-----------|--------------|
-| Gorden | 40263250 | - readme, github repo,  |
-| [Teammate 2] | [ID] | [Describe contributions] |
+| Gorden | 40263250 | - readme, github repo, Baseline Model Execution |
+| Omar Benjelloun | 40215107 | - Data Retrieval, Wrangling/Cleaning, EDA|
 
 ## Project Overview
 
-This project implements a complete data analytics pipeline on the **Bixi 2025 Trip History, Environment Canada Weather (Hourly Climate), STM (Metro station locations)** dataset.
+This project implements a complete data analytics pipeline on the **Bixi 2025 Trip History** dataset, enriched with **Environment Canada Hourly Climate** data. The goal is to investigate how environmental conditions influence urban cycling behavior in Montreal.
 
 ### Research Questions
 
-1. **Supervised:** Can we predict trip duration or categorize trips as "Long vs. Short" by integrating time-of-day, real-time weather conditions, and proximity to the nearest Metro?
-2. **Unsupervised:** By clustering stations based on their 'Net Flow' (Returns vs Departures)
-and their distance to the nearest Metro, can we programmatically identify the city’s Commuter vs Leisure transit zones?
+1. **Supervised: Predictive Regression** To what degree can temperature and precipitation predict Bixi trip duration?
+2. **Unsupervised: Behavioral Clustering** 2. **Unsupervised: Behavioral Clustering** By clustering stations based on their 'Net Flow' (Returns vs Departures)
+
 
 ## Dataset
 ### 1. 
@@ -28,32 +28,28 @@ and their distance to the nearest Metro, can we programmatically identify the ci
 ### 2. 
 - **Name:** Environment Canada Weather (Hourly Climate)
 - **Source:**https://climate-change.canada.ca/climate-data/#/hourly-climate-data
-- **Size:**  4.6 MB (Combined)
+- **Size:**  4.6 MB (Combined Jan-Dec)
 - **Records:** 17,977
 - **Features:** 40 columns
 
-### 3. 
-- **Name:** STM (Metro station locations)
-- **Source:** https://www.stm.info/en/about/developers
-- **Size:** 937 KB
-- **Records:** 8951
-- **Features:** 9 columns: stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,location_type,parent_station,wheelchair_boarding
-
 ### Download Instructions
-[to complete]
+1. **Bixi data:** Download the 2025 trip history CSV from [bixi.com/en/open-data/](https://bixi.com/en/open-data/) and place it in `data/raw/Bixi2025.csv`
+2. **Weather data:** Download hourly climate data for Montreal (McTavish station) from [Climate Change Canada](https://climate-change.canada.ca/climate-data/#/hourly-climate-data). Save as two files in `data/raw/`:
+   - `HourlyClimate - JanToMar.csv`
+   - `HourlyClimate - MarToDec.csv`
 
 ## Setup & Reproduction
 
 1. Clone the repository:
    ```bash
-   git clone <repo-url>
-   cd <repo-name>
+   git clone https://github.com/forGOATten/COMP333_Project
+   cd COMP333_Project
    ```
 
 2. Create a virtual environment (recommended):
    ```bash
    python -m venv .venv
-   source .venv/bin/activate  # On Windows: venv\Scripts\activate
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
 3. Install dependencies:
@@ -69,9 +65,8 @@ and their distance to the nearest Metro, can we programmatically identify the ci
    ```
 
 ## Dependencies
-(update as we go)
 See `requirements.txt` for the full list. Key libraries include:
-pandas, numpy, matplotlib, seaborn, scikit-learn, scipy, xgboost, lightgbm
+pandas, numpy, matplotlib, seaborn, scikit-learn, scipy
 
 ## Phases & Deadlines
 
@@ -104,7 +99,12 @@ pandas, numpy, matplotlib, seaborn, scikit-learn, scipy, xgboost, lightgbm
 This project uses AI coding assistants for boilerplate code generation, debugging assistance, and documentation. All code is reviewed and understood by team members.
 
 ## References
-(update as we go)
 - BIXI Montréal. "Open Data." BIXI Montréal, https://bixi.com/en/open-data/
 - Government of Canada. "Hourly Climate Data." Climate Change Canada, https://climate-change.canada.ca/climate-data/#/hourly-climate-data
 - Société de transport de Montréal (STM). "Developers." STM, https://www.stm.info/en/about/developers
+- Breiman, L., Friedman, J., Stone, C. J., & Olshen, R. A. (1984). *Classification and Regression Trees*. CRC Press.
+- Géron, A. (2022). *Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow* (3rd ed.). O'Reilly Media.
+- Hastie, T., Tibshirani, R., & Friedman, J. (2009). *The Elements of Statistical Learning* (2nd ed.). Springer.
+- Pedregosa, F., et al. "Scikit-learn: Machine Learning in Python." *Journal of Machine Learning Research*, vol. 12, 2011, pp. 2825–2830. https://scikit-learn.org/stable/
+- pandas Development Team. "pandas: Powerful Python Data Analysis Toolkit." https://pandas.pydata.org/docs/
+- Hunter, J.D. "Matplotlib: A 2D Graphics Environment." *Computing in Science & Engineering*, vol. 9, no. 3, 2007, pp. 90–95. https://matplotlib.org/
