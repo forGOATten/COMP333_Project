@@ -1,18 +1,19 @@
 # COMP 333 Final Project — Dependencies
 # Install with: pip install -r requirements.txt
 
-# Core
+# Core Data Manipulation
 pandas>=2.0
 numpy>=1.24
 scipy>=1.10
 
-# Visualization
+# Data Visualization
 matplotlib>=3.7
 seaborn>=0.12
 
-# Machine Learning
+# Machine Learning & Modeling
 scikit-learn>=1.3
 
-# Notebooks
+# Notebook Environment & Connectivity
 jupyter>=1.0
 notebook>=7.0
+ipykernel
