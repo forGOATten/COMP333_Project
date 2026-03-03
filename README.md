@@ -7,7 +7,7 @@
 | Name | Student ID | Phase 1 Contribution |
 |------|-----------|--------------|
 | Gorden | 40263250 | - readme, github repo, Baseline Model & Analysis |
-| Omar Benjelloun | 40215107 | - Data Retrieval, Wrangling/Cleaning, EDA|
+| Omar Benjelloun | 40215107 | - Data Retrieval, Wrangling/Cleaning, EDA, Model Implementation|
 
 ## Project Overview
 
