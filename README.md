@@ -1,20 +1,25 @@
 # COMP 333 — Final Project: End-to-End Data Analytics Pipeline
 
+# Montreal Bixi Mobility & Climate Analysis (2025)
+
 ## Team Information
 
-| Name | Student ID | Contribution |
+| Name | Student ID | Phase 1 Contribution |
 |------|-----------|--------------|
-| Gorden | 40263250 | - readme, github repo, Baseline Model Execution |
+| Gorden | 40263250 | - readme, github repo, Baseline Model & Analysis |
 | Omar Benjelloun | 40215107 | - Data Retrieval, Wrangling/Cleaning, EDA|
 
 ## Project Overview
 
-This project implements a complete data analytics pipeline on the **Bixi 2025 Trip History** dataset, enriched with **Environment Canada Hourly Climate** data. The goal is to investigate how environmental conditions influence urban cycling behavior in Montreal.
+This project implements a complete data analytics pipeline on the **Bixi 2025 Trip History** dataset, enriched with **Environment Canada Hourly Climate** data. 
+The goal is to investigate how environmental conditions influence urban cycling behavior in Montreal.
 
 ### Research Questions
 
-1. **Supervised: Predictive Regression** To what degree can temperature and precipitation predict Bixi trip duration?
-2. **Unsupervised: Behavioral Clustering** 2. **Unsupervised: Behavioral Clustering** By clustering stations based on their 'Net Flow' (Returns vs Departures)
+We investigate a central inquiry through two distinct analytical lenses:
+	**"To what degree do environmental fluctuations (Temperature and Precipitation) dictate Bixi trip duration and rider behavior in Montreal?"**
+1. **Supervised (Predictive Regression)**: Can we accurately predict trip duration using meteorological features as our primary inputs?
+2. **Unsupervised (Behavioral Clustering)**: Does the data naturally segment into "Rider Personas" (e.g., Weather-Resilient vs. Fair-Weather riders) that align with actual trip durations?
 
 
 ## Dataset
@@ -22,21 +27,39 @@ This project implements a complete data analytics pipeline on the **Bixi 2025 Tr
 - **Name:** Bixi 2025 Trip History
 - **Source:** https://bixi.com/en/open-data/
 - **Size:** 2.60GB
-- **Records:** 14.2m
-- **Features:** 10 columns
+- **Records:** 14.2 Million
+- **Features:** 10 columns (including 13-digit Unix timestamps)
 
 ### 2. 
 - **Name:** Environment Canada Weather (Hourly Climate)
-- **Source:**https://climate-change.canada.ca/climate-data/#/hourly-climate-data
+- **Source:** https://climate-change.canada.ca/climate-data/#/hourly-climate-data
 - **Size:**  4.6 MB (Combined Jan-Dec)
 - **Records:** 17,977
 - **Features:** 40 columns
 
 ### Download Instructions
-1. **Bixi data:** Download the 2025 trip history CSV from [bixi.com/en/open-data/](https://bixi.com/en/open-data/) and place it in `data/raw/Bixi2025.csv`
-2. **Weather data:** Download hourly climate data for Montreal (McTavish station) from [Climate Change Canada](https://climate-change.canada.ca/climate-data/#/hourly-climate-data). Save as two files in `data/raw/`:
+1. **Bixi data:** Download the 2025 trip history CSV from [bixi.com/en/open-data/](https://bixi.com/en/open-data/) and place it in `data/raw/`, and name it as: `Bixi2025.csv`
+2. **Weather data:** Download hourly climate data for Montreal (McTavish station) from [Climate Change Canada](https://climate-change.canada.ca/climate-data/#/hourly-climate-data). Save as two files in `data/raw/`, and name the files as:
    - `HourlyClimate - JanToMar.csv`
    - `HourlyClimate - MarToDec.csv`
+   
+
+## Project Structure
+COMP333_Project/
+├── data/
+│   ├── raw/                    # Raw Bixi & Environment Canada CSVs
+│   │   ├── Bixi2025.csv
+│   │   ├── HourlyClimate - JanToMar.csv
+│   │   └── HourlyClimate - MarToDec.csv
+│   └── processed/              # Cleaned/Merged datasets (generated output by pipeline)
+├── src/                        
+│   ├── wrangle.py              # Script for data cleaning & synchronization
+│   └── analysis.py             # Script for quantDDA() and vizDDA() logic
+├── notebooks/                  
+│   └── main_ Phase1.ipynb      # Phase 1: Complete Data Acquisition & Baseline Notebook
+├── README.md                   # Project documentation & setup
+└── Requirements.txt            # List of Python dependencies
+
 
 ## Setup & Reproduction
 
@@ -72,21 +95,23 @@ pandas, numpy, matplotlib, seaborn, scikit-learn, scipy
 
 | Phase | Description | Due Date |
 |-------|-------------|----------|
-| Phase 1 | Data Acquisition & Baseline | March 1, 2026 |
+| Phase 1 | Data Acquisition & Baseline | March 3, 2026 |
 | Phase 2 | Advanced Modeling | April 5, 2026 |
-| Phase 3 | Complete Pipeline & Demo | Final Exam |
+| Phase 3 | Complete Pipeline & Demo | Final Exam Period |
 
 ### Phase 1: Data Acquisition & Baseline
 
-- **Data Retrieval:** Programmatic retrieval of the 2GB+ Bixi CSV and retrieval of STM/Weather coordinates.
-- **Wrangling:** Implement a reproducible pipeline to convert Unix timestamps and filter outliers.
-- **Baseline Model:** Train a Simple Linear/Logistic Regression (70/15/15 split) to establish a performance floor.
+- **Data Retrieval:** Programmatically retrieved and synchronized 14.2M Bixi records with local weather logs.
+- **Wrangling:** Implemented a reproducible pipeline to handle temporal synchronization and filter outliers (trips < 5m or > 4h).
 - **EDA:** Use `quantDDA()` and `vizDDA()` to visualize trip density and weather correlations.
+- **Baseline Model:** Established a "performance floor" using Linear Regression and a Decision Tree Regressor on a 70/15/15 split.
+- **Findings:** Established that weather alone explains ~0.5% of trip duration variance ($R^2 = 0.0052$), justifying the need for advanced features in Phase 2.
+
 
 ### Phase 2: Advanced Modeling & Feature Engineering
 
 - **Advanced Supervised Learning:** Implement appropriate models to capture non-linear weather relationships.
-- **Feature Engineering:** Create domain-specific features (e.g., `Is_Rush_Hour`, `Is_Weekend`) and interaction features.
+- **Feature Engineering:** Create domain-specific features and interaction features.
 - **Unsupervised:** Implement dimension reduction and determine optimal station clusters. Visualize; evaluate quality; justify appropriateness.
 
 ### Phase 3: Pipeline & Ethics
@@ -101,7 +126,6 @@ This project uses AI coding assistants for boilerplate code generation, debuggin
 ## References
 - BIXI Montréal. "Open Data." BIXI Montréal, https://bixi.com/en/open-data/
 - Government of Canada. "Hourly Climate Data." Climate Change Canada, https://climate-change.canada.ca/climate-data/#/hourly-climate-data
-- Société de transport de Montréal (STM). "Developers." STM, https://www.stm.info/en/about/developers
 - Breiman, L., Friedman, J., Stone, C. J., & Olshen, R. A. (1984). *Classification and Regression Trees*. CRC Press.
 - Géron, A. (2022). *Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow* (3rd ed.). O'Reilly Media.
 - Hastie, T., Tibshirani, R., & Friedman, J. (2009). *The Elements of Statistical Learning* (2nd ed.). Springer.
