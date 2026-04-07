@@ -23,14 +23,14 @@ We investigate a central inquiry through two distinct analytical lenses:
 
 | Name | Student ID | Contribution |
 |------|------------|--------------|
-| Gorden | 40263250 | GitHub repository & version control; baseline models (Linear Regression, Decision Tree); README |
+| Gorden Quach| 40263250 | GitHub repository & version control; baseline models (Linear Regression, Decision Tree); README |
 | Omar Benjelloun | 40215107 | Data retrieval, wrangling & cleaning pipeline, EDA |
 
 **Phase 2**
 
 | Name | Student ID | Contribution |
 |------|------------|--------------|
-| Gorden | 40263250 | Advanced supervised learning: Random Forest (implementation, tuning, evaluation); feature engineering (temporal, cyclical & interaction features; unsupervised learning, PCA (dimensionality reduction, scree plot, variance analysis) |
+| Gorden Quach | 40263250 | Advanced supervised learning: Random Forest (implementation, tuning, evaluation); feature engineering (temporal, cyclical & interaction features; unsupervised learning, PCA (dimensionality reduction, scree plot, variance analysis) |
 | Omar Benjelloun | 40215107 | Advanced supervised learning: LightGBM & Linear SVC (implementation, tuning, evaluation); unsupervised learning: K-Means clustering (optimal k selection, cluster visualisation, profile analysis); Feature Selection; model interpretation (feature importance, partial dependence plots, insights) |
 
 **Note:** While responsibilities were divided, both team members were involved in all stages to maintain a shared understanding of the full pipeline.
