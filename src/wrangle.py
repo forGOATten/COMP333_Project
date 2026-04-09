@@ -30,7 +30,10 @@ def wrangle_bixi_chunk(chunk):
     chunk['duration_min'] = (chunk['end_dt'] - chunk['start_dt']).dt.total_seconds() / 60
     valid_mask = (chunk['duration_min'] >= 5) & (chunk['duration_min'] <= 240)
     
-    return chunk[valid_mask].copy()
+    chunk = chunk[valid_mask].copy()
+    # Drop original ms-epoch columns — start_dt/end_dt already contain this info
+    chunk = chunk.drop(columns=['STARTTIMEMS', 'ENDTIMEMS'], errors='ignore')
+    return chunk
 
 
 

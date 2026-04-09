@@ -2,64 +2,83 @@
 
 # Montreal Bixi Mobility & Climate Analysis (2025)
 
-## Team Information
-
-| Name | Student ID | Phase 1 Contribution |
-|------|-----------|--------------|
-| Gorden | 40263250 | - readme, github repo, Baseline Model & Analysis |
-| Omar Benjelloun | 40215107 | - Data Retrieval, Wrangling/Cleaning, EDA|
-
 ## Project Overview
 
-This project implements a complete data analytics pipeline on the **Bixi 2025 Trip History** dataset, enriched with **Environment Canada Hourly Climate** data. 
-The goal is to investigate how environmental conditions influence urban cycling behavior in Montreal.
+This project implements a complete data analytics pipeline on the **Bixi 2025 Trip History** dataset, enriched with **Environment Canada Hourly Climate** data. The pipeline transitions from raw, high-volume data to a suite of supervised and unsupervised machine learning models, culminating in a fully interpreted classification system that investigates how Montreal's climate and temporal context influence urban cycling behaviour.
 
 ### Research Questions
 
 We investigate a central inquiry through two distinct analytical lenses:
-	**"To what degree do environmental fluctuations (Temperature and Precipitation) dictate Bixi trip duration and rider behavior in Montreal?"**
-1. **Supervised (Predictive Regression)**: Can we accurately predict trip duration using meteorological features as our primary inputs?
-2. **Unsupervised (Behavioral Clustering)**: Does the data naturally segment into "Rider Personas" (e.g., Weather-Resilient vs. Fair-Weather riders) that align with actual trip durations?
 
+**"To what degree do environmental and temporal features dictate Bixi trip duration and rider behaviour in Montreal?"**
 
-## Dataset
-### 1. 
-- **Name:** Bixi 2025 Trip History
+1. **Supervised (Classification):** Can we reliably classify a trip as Short, Medium, or Long based on weather and temporal conditions at the time of departure?
+2. **Unsupervised (Behavioural Clustering):** Does the feature space naturally segment into interpretable rider personas — and do those personas align with the supervised duration classes?
+
+---
+
+## Team & Division of Labour
+
+**Phase 1**
+
+| Name | Student ID | Contribution |
+|------|------------|--------------|
+| Gorden Quach| 40263250 | GitHub repository & version control; baseline models (Linear Regression, Decision Tree); README |
+| Omar Benjelloun | 40215107 | Data retrieval, wrangling & cleaning pipeline, EDA |
+
+**Phase 2**
+
+| Name | Student ID | Contribution |
+|------|------------|--------------|
+| Gorden Quach | 40263250 | Advanced supervised learning: Random Forest (implementation, tuning, evaluation); feature engineering (temporal, cyclical & interaction features; unsupervised learning, PCA (dimensionality reduction, scree plot, variance analysis) |
+| Omar Benjelloun | 40215107 | Advanced supervised learning: LightGBM & Linear SVC (implementation, tuning, evaluation); unsupervised learning: K-Means clustering (optimal k selection, cluster visualisation, profile analysis); Feature Selection; model interpretation (feature importance, partial dependence plots, insights) |
+
+**Note:** While responsibilities were divided, both team members were involved in all stages to maintain a shared understanding of the full pipeline.
+
+---
+
+## Datasets
+
+### 1. Bixi 2025 Trip History
 - **Source:** https://bixi.com/en/open-data/
-- **Size:** 2.60GB
-- **Records:** 14.2 Million
+- **Size:** 2.60 GB
+- **Records:** 14.2 Million raw → 11.5 Million after cleaning
 - **Features:** 10 columns (including 13-digit Unix timestamps)
 
-### 2. 
-- **Name:** Environment Canada Weather (Hourly Climate)
+### 2. Environment Canada Weather (Hourly Climate)
 - **Source:** https://climate-change.canada.ca/climate-data/#/hourly-climate-data
-- **Size:**  4.6 MB (Combined Jan-Dec)
+- **Size:** 4.6 MB (Combined Jan–Dec)
 - **Records:** 17,977
 - **Features:** 40 columns
 
 ### Download Instructions
-1. **Bixi data:** Download the 2025 trip history CSV from [bixi.com/en/open-data/](https://bixi.com/en/open-data/) and place it in `data/raw/`, and name it as: `Bixi2025.csv`
-2. **Weather data:** Download hourly climate data for Montreal (McTavish station) from [Climate Change Canada](https://climate-change.canada.ca/climate-data/#/hourly-climate-data). Save as two files in `data/raw/`, and name the files as:
+1. **Bixi data:** Download the 2025 trip history CSV from [bixi.com/en/open-data/](https://bixi.com/en/open-data/) and place it in `data/raw/`, named as: `Bixi2025.csv`
+2. **Weather data:** Download hourly climate data for Montreal (McTavish station) from [Climate Change Canada](https://climate-change.canada.ca/climate-data/#/hourly-climate-data). Save as two files in `data/raw/`:
    - `HourlyClimate - JanToMar.csv`
    - `HourlyClimate - MarToDec.csv`
-   
+
+---
 
 ## Project Structure
+
+```
 COMP333_Project/
 ├── data/
 │   ├── raw/                    # Raw Bixi & Environment Canada CSVs
 │   │   ├── Bixi2025.csv
 │   │   ├── HourlyClimate - JanToMar.csv
 │   │   └── HourlyClimate - MarToDec.csv
-│   └── processed/              # Cleaned/Merged datasets (generated output by pipeline)
-├── src/                        
-│   ├── wrangle.py              # Script for data cleaning & synchronization
-│   └── analysis.py             # Script for quantDDA() and vizDDA() logic
-├── notebooks/                  
-│   └── main_ Phase1.ipynb      # Phase 1: Complete Data Acquisition & Baseline Notebook
+│   └── processed/              # Cleaned/Merged datasets (generated by pipeline)
+├── src/
+│   ├── wrangle.py              # Data cleaning & temporal synchronisation
+│   └── analysis.py             # quantDDA() and vizDDA() logic
+├── notebooks/
+│   └── main.ipynb              # Complete notebook (Phase 1 + Phase 2)
 ├── README.md                   # Project documentation & setup
-└── Requirements.txt            # List of Python dependencies
+└── requirements.txt            # Python dependencies
+```
 
+---
 
 ## Setup & Reproduction
 
@@ -80,55 +99,83 @@ COMP333_Project/
    pip install -r requirements.txt
    ```
 
-4. Download the dataset (see instructions above).
+4. Download the datasets (see instructions above).
 
-5. Open and run the notebooks in order:
+5. Open and run the notebook:
    ```bash
-   jupyter notebook
+   jupyter notebook notebooks/main.ipynb
    ```
 
+---
+
 ## Dependencies
+
 See `requirements.txt` for the full list. Key libraries include:
-pandas, numpy, matplotlib, seaborn, scikit-learn, scipy
 
-## Phases & Deadlines
+pandas, numpy, matplotlib, seaborn, scikit-learn, lightgbm, scipy
 
-| Phase | Description | Due Date |
-|-------|-------------|----------|
-| Phase 1 | Data Acquisition & Baseline | March 3, 2026 |
-| Phase 2 | Advanced Modeling | April 5, 2026 |
-| Phase 3 | Complete Pipeline & Demo | Final Exam Period |
+---
+
+## Phase Summary
 
 ### Phase 1: Data Acquisition & Baseline
 
-- **Data Retrieval:** Programmatically retrieved and synchronized 14.2M Bixi records with local weather logs.
-- **Wrangling:** Implemented a reproducible pipeline to handle temporal synchronization and filter outliers (trips < 5m or > 4h).
-- **EDA:** Use `quantDDA()` and `vizDDA()` to visualize trip density and weather correlations.
-- **Baseline Model:** Established a "performance floor" using Linear Regression and a Decision Tree Regressor on a 70/15/15 split.
-- **Findings:** Established that weather alone explains ~0.5% of trip duration variance ($R^2 = 0.0052$), justifying the need for advanced features in Phase 2.
-
+- **Data Retrieval & Integration:** Programmatically retrieved and synchronised 14.2M Bixi records with Environment Canada hourly climate data. Temporal alignment via Unix-millisecond conversion and weather join on rounded hour.
+- **Wrangling:** Implemented a reproducible pipeline to handle temporal synchronisation and filter outliers (trips < 5 min or > 4 h). Final cleaned dataset: 11,546,527 trips.
+- **EDA:** Used `quantDDA()` and `vizDDA()` to audit data quality and visualise trip density and weather correlations.
+- **Baseline Model:** Established a performance floor using Linear Regression and a Decision Tree Regressor on a 70/15/15 split with weather-only features (TEMP, PRECIP_AMOUNT).
+- **Findings:** Weather alone explains ~0.5% of trip duration variance (R² ≈ 0.005), justifying the need for advanced features and a classification reframing in Phase 2.
 
 ### Phase 2: Advanced Modeling & Feature Engineering
 
-- **Advanced Supervised Learning:** Implement appropriate models to capture non-linear weather relationships.
-- **Feature Engineering:** Create domain-specific features and interaction features.
-- **Unsupervised:** Implement dimension reduction and determine optimal station clusters. Visualize; evaluate quality; justify appropriateness.
+- **Problem Reframing:** Target variable converted to a 3-class classification (`duration_cat`) using data-driven tertile boundaries via `pd.qcut`, ensuring balanced classes (~33.3% each): Short (< 9.6 min), Medium (9.6-17.0 min), Long (> 17.0 min).
+- **Feature Engineering:** 15 features constructed from 3 weather, 4 raw temporal, 4 cyclical encodings, and 4 interaction/polynomial features. Feature selection validated via three methods: Mutual Information (filter), RFE with LinearSVC (wrapper), and Random Forest Gini importance (embedded).
+- **Advanced Supervised Learning:** Three classifiers: Random Forest, LightGBM, and Linear SVC, trained first on baseline features (2 weather-only), then on the full 15-feature engineered set with hyperparameter tuning via RandomizedSearchCV (RF, LightGBM) and GridSearchCV (LinearSVC). Evaluated by Accuracy, Macro F1, and ROC-AUC (OVR).
+- **Model Comparison:** Systematic 6-model comparison (3 baseline + 3 engineered) with delta tables, bar charts, confusion matrices, ROC curves, and a paired t-test for statistical significance between the top two models.
+- **Best Model:** Random Forest (Engineered) selected, Macro F1 = 0.3542 on validation, 0.3540 on held-out test set. Val ≈ Test confirms no overfitting.
+- **Unsupervised Learning:** PCA for dimensionality reduction (8 components for 95% variance); K-Means clustering with elbow + silhouette analysis selecting k=3 (silhouette = 0.520). Three interpretable behavioural personas discovered: Cold-Season trips, Warm Weekday commuters, Weekend Leisure riders.
+- **Interpretation:** Feature importance (RF and LightGBM) and Partial Dependence Plots for top-4 features. Temperature and temporal features dominate; Medium class remains structurally hard to classify.
 
-### Phase 3: Pipeline & Ethics
+### Phase 3: Pipeline & Ethics (Upcoming)
 
 - **End-to-End Pipeline:** Refactor logic into modular, error-handled Python functions for reproducibility.
-- **Ethical Considerations (Model Fairness):** We will analyze "Majority Bias" within our model. Because 90% of data represents fair-weather daytime trips, we will evaluate if our model "marginalizes" night-shift or all-weather commuters by being less accurate for minority conditions.
+- **Ethical Considerations (Model Fairness):** Analyse potential majority bias, because ~90% of data represents fair-weather daytime trips, evaluate whether the model marginalises night-shift or all-weather commuters by being less accurate for minority conditions.
+
+---
+
+## Key Results
+
+| Model | Accuracy | Macro F1 | ROC-AUC |
+|-------|----------|----------|---------|
+| RF (Engineered) | 0.3728 | **0.3542** | 0.5462 |
+| LightGBM (Engineered) | 0.3730 | 0.3496 | 0.5466 |
+| LinearSVC (Engineered) | 0.3589 | 0.3354 | 0.5295 |
+| RF (Baseline) | 0.3551 | 0.3341 | 0.5237 |
+| LightGBM (Baseline) | 0.3557 | 0.3324 | 0.5247 |
+| LinearSVC (Baseline) | 0.3542 | 0.2815 | 0.5217 |
+
+Feature engineering improved all models across all metrics. The best model (RF Engineered) classifies trips above random chance (Macro F1 = 0.354 vs. 0.333 random), but the absolute performance reflects the fundamental difficulty of predicting individual trip duration from environmental and temporal features alone.
+
+---
 
 ## AI Tool Usage
 
 This project uses AI coding assistants for boilerplate code generation, debugging assistance, and documentation. All code is reviewed and understood by team members.
 
+---
+
 ## References
+
 - BIXI Montréal. "Open Data." BIXI Montréal, https://bixi.com/en/open-data/
 - Government of Canada. "Hourly Climate Data." Climate Change Canada, https://climate-change.canada.ca/climate-data/#/hourly-climate-data
+- Breiman, L. (2001). Random Forests. *Machine Learning, 45*(1), 5–32.
 - Breiman, L., Friedman, J., Stone, C. J., & Olshen, R. A. (1984). *Classification and Regression Trees*. CRC Press.
+- Cortes, C., & Vapnik, V. (1995). Support-vector networks. *Machine Learning, 20*(3), 273–297.
 - Géron, A. (2022). *Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow* (3rd ed.). O'Reilly Media.
+- Goldstein, A., Kapelner, A., Bleich, J., & Pitkin, E. (2015). Peeking inside the black box. *Journal of Computational and Graphical Statistics, 24*(1), 44–65.
 - Hastie, T., Tibshirani, R., & Friedman, J. (2009). *The Elements of Statistical Learning* (2nd ed.). Springer.
-- Pedregosa, F., et al. "Scikit-learn: Machine Learning in Python." *Journal of Machine Learning Research*, vol. 12, 2011, pp. 2825–2830. https://scikit-learn.org/stable/
-- pandas Development Team. "pandas: Powerful Python Data Analysis Toolkit." https://pandas.pydata.org/docs/
-- Hunter, J.D. "Matplotlib: A 2D Graphics Environment." *Computing in Science & Engineering*, vol. 9, no. 3, 2007, pp. 90–95. https://matplotlib.org/
+- Jolliffe, I. T. (2002). *Principal Component Analysis* (2nd ed.). Springer.
+- Ke, G., et al. (2017). LightGBM: A highly efficient gradient boosting decision tree. *Advances in Neural Information Processing Systems, 30*.
+- MacQueen, J. (1967). Some methods for classification and analysis of multivariate observations. *Proceedings of the 5th Berkeley Symposium, 1*, 281–297.
+- Pedregosa, F., et al. (2011). Scikit-learn: Machine Learning in Python. *Journal of Machine Learning Research, 12*, 2825–2830.
+- Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to cluster analysis. *Journal of Computational and Applied Mathematics, 20*, 53–65.
