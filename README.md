@@ -33,6 +33,13 @@ We investigate a central inquiry through two distinct analytical lenses:
 | Gorden Quach | 40263250 | Advanced supervised learning: Random Forest (implementation, tuning, evaluation); feature engineering (temporal, cyclical & interaction features; unsupervised learning, PCA (dimensionality reduction, scree plot, variance analysis) |
 | Omar Benjelloun | 40215107 | Advanced supervised learning: LightGBM & Linear SVC (implementation, tuning, evaluation); unsupervised learning: K-Means clustering (optimal k selection, cluster visualisation, profile analysis); Feature Selection; model interpretation (feature importance, partial dependence plots, insights) |
 
+**Phase 3**
+
+| Name | Student ID | Contribution |
+|------|------------|--------------|
+| Gorden Quach| 40263250 | Comprehensive Evaluation, (Bonus) Ensemble Stacking |
+| Omar Benjelloun | 40215107 | End-to-End Pipeline, Comprehensive Evaluation, Ethical Considerations, Final Report |
+
 **Note:** While responsibilities were divided, both team members were involved in all stages to maintain a shared understanding of the full pipeline.
 
 ---
@@ -136,10 +143,14 @@ pandas, numpy, matplotlib, seaborn, scikit-learn, lightgbm, scipy
 - **Unsupervised Learning:** PCA for dimensionality reduction (8 components for 95% variance); K-Means clustering with elbow + silhouette analysis selecting k=3 (silhouette = 0.520). Three interpretable behavioural personas discovered: Cold-Season trips, Warm Weekday commuters, Weekend Leisure riders.
 - **Interpretation:** Feature importance (RF and LightGBM) and Partial Dependence Plots for top-4 features. Temperature and temporal features dominate; Medium class remains structurally hard to classify.
 
-### Phase 3: Pipeline & Ethics (Upcoming)
+### Phase 3: Complete Pipeline & Final Analysis
+ 
+- **Pipeline Refactoring:** All implementation logic extracted into six reusable `src/` modules (`wrangle.py`, `features.py`, `models.py`, `evaluation.py`, `robustness.py`, `analysis.py`). The notebook serves as a thin orchestrator with no inline model training or feature engineering code.
+- **Comprehensive Evaluation:** Learning curves (bias-variance diagnosis), month-by-month temporal robustness, condition-based subgroup analysis (weather and time-of-day strata), and bootstrap 95% confidence intervals on all engineered models. Test-set performance confirms Val ≈ Test across all metrics.
+- **Ethical Considerations:** Proxy-bias analysis of temporal features as socioeconomic proxies, station-density fairness risk assessment, privacy review (quasi-identifier risk), and a structured limitations / future-work table.
+- **Executive Summary:** Self-contained final report synthesising objectives, pipeline architecture, key results, core findings, ethical highlights, and prioritised recommendations.
+- **Bonus — Ensemble Stacking:** `StackingClassifier` combining RF, LightGBM, and LinearSVC with a logistic regression meta-learner to test whether model diversity yields additional signal beyond the best single model.
 
-- **End-to-End Pipeline:** Refactor logic into modular, error-handled Python functions for reproducibility.
-- **Ethical Considerations (Model Fairness):** Analyse potential majority bias, because ~90% of data represents fair-weather daytime trips, evaluate whether the model marginalises night-shift or all-weather commuters by being less accurate for minority conditions.
 
 ---
 
@@ -168,9 +179,13 @@ This project uses AI coding assistants for boilerplate code generation, debuggin
 
 - BIXI Montréal. "Open Data." BIXI Montréal, https://bixi.com/en/open-data/
 - Government of Canada. "Hourly Climate Data." Climate Change Canada, https://climate-change.canada.ca/climate-data/#/hourly-climate-data
+- Barocas, S., Hardt, M., & Narayanan, A. (2023). *Fairness and Machine Learning: Limitations and Opportunities.* MIT Press.
+- Bouthillier, X., Laurent, C., & Vincent, P. (2021). Accounting for variance in machine learning benchmarks. *MLSys 2021.*
 - Breiman, L. (2001). Random Forests. *Machine Learning, 45*(1), 5–32.
 - Breiman, L., Friedman, J., Stone, C. J., & Olshen, R. A. (1984). *Classification and Regression Trees*. CRC Press.
 - Cortes, C., & Vapnik, V. (1995). Support-vector networks. *Machine Learning, 20*(3), 273–297.
+- Dwork, C., & Roth, A. (2014). The algorithmic foundations of differential privacy. *Foundations and Trends in Theoretical Computer Science, 9*(3–4).
+- Efron, B. (1979). Bootstrap methods: Another look at the jackknife. *The Annals of Statistics, 7*(1), 1–26.
 - Géron, A. (2022). *Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow* (3rd ed.). O'Reilly Media.
 - Goldstein, A., Kapelner, A., Bleich, J., & Pitkin, E. (2015). Peeking inside the black box. *Journal of Computational and Graphical Statistics, 24*(1), 44–65.
 - Hastie, T., Tibshirani, R., & Friedman, J. (2009). *The Elements of Statistical Learning* (2nd ed.). Springer.
@@ -179,3 +194,4 @@ This project uses AI coding assistants for boilerplate code generation, debuggin
 - MacQueen, J. (1967). Some methods for classification and analysis of multivariate observations. *Proceedings of the 5th Berkeley Symposium, 1*, 281–297.
 - Pedregosa, F., et al. (2011). Scikit-learn: Machine Learning in Python. *Journal of Machine Learning Research, 12*, 2825–2830.
 - Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to cluster analysis. *Journal of Computational and Applied Mathematics, 20*, 53–65.
+- Wolpert, D. H. (1992). Stacked generalization. *Neural Networks, 5*(2), 241–259.
